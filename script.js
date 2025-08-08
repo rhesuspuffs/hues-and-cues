@@ -3,19 +3,36 @@ const status = document.getElementById("status");
 
 let selectedColor = null;
 
-// generate a grid of 18x10 = 180 hues
-for (let h = 0; h < 360; h += 20) {
-  for (let l = 30; l <= 80; l += 10) {
-    const cell = document.createElement("div");
-    cell.className = "color-cell";
-    cell.style.backgroundColor = `hsl(${h}, 100%, ${l}%)`;
-    cell.dataset.h = h;
-    cell.dataset.l = l;
-    cell.onclick = () => {
-      selectedColor = { h, l };
-      status.textContent = `You picked: H=${h}, L=${l}`;
+// Generate a full 30x18 grid
+// Hue: 0–360 in 30 steps = every 12 degrees
+// Lightness: 25% to 85% in 18 steps (to span full range with visibility)
+for (let row = 0; row < 18; row++) {
+  const lightness = 25 + (row * (60 / 17)); // from 25 to 85
+
+  for (let col = 0; col < 30; col++) {
+    const hue = col * 12; // 0 to 348
+
+    const container = document.createElement("div");
+    container.className = "color-cell";
+
+    const swatch = document.createElement("div");
+    swatch.className = "color-swatch";
+    const hsl = `hsl(${hue}, 100%, ${lightness}%)`;
+    swatch.style.backgroundColor = hsl;
+
+    const label = document.createElement("div");
+    label.className = "color-label";
+    label.textContent = `H${hue} L${Math.round(lightness)}`;
+
+    container.appendChild(swatch);
+    container.appendChild(label);
+
+    container.onclick = () => {
+      selectedColor = { hue, lightness };
+      status.textContent = `You picked: H${hue} L${Math.round(lightness)}%`;
     };
-    grid.appendChild(cell);
+
+    grid.appendChild(container);
   }
 }
 
