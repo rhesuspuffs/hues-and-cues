@@ -1,23 +1,78 @@
 body {
-  font-family: sans-serif;
-  text-align: center;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background: #f5f5f5;
   margin: 0;
-  padding: 20px;
-  background: #f2f2f2;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-weight: 600;
+  font-size: 32px;
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
 }
 
 #color-grid {
   display: grid;
-  grid-template-columns: repeat(18, 20px);
-  grid-gap: 2px;
-  margin: 20px auto;
-  width: max-content;
+  grid-template-columns: repeat(30, 50px);
+  gap: 8px;
+  justify-content: center;
 }
+
 .color-cell {
-  width: 20px;
-  height: 20px;
+  width: 50px;
+  height: 65px;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  transition: transform 0.15s ease;
+}
+
+.color-cell:hover {
+  transform: scale(1.07);
+  z-index: 2;
+}
+
+.color-swatch {
+  height: 70%;
+  width: 100%;
+}
+
+.color-label {
+  background: white;
+  font-size: 9px;
+  padding: 3px;
+  text-align: center;
+  color: #333;
+}
+
+input, button {
+  margin-top: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+button {
+  background: black;
+  color: white;
+  border: none;
+  margin-left: 10px;
   cursor: pointer;
 }
-.color-cell:hover {
-  outline: 2px solid black;
+
+#status {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #333;
 }
